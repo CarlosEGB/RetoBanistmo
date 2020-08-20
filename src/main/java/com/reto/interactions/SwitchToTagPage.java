@@ -18,7 +18,7 @@ public class SwitchToTagPage implements Interaction {
     }
 
     public static Performable switchTag(int tag) {
-        return Tasks.instrumented(SwitchToTagPage.class,tag);
+        return Tasks.instrumented(SwitchToTagPage.class, tag);
     }
 
     @Override

@@ -8,8 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = "src/test/resources/feature/comprobar_pdf.feature",
-        tags = "@ObjetosExtraviados",
-       // tags = "@EjecucionPersupuestaria",
+        tags = "@ComprobarPdfs",
         glue = {"com.reto.steps_definitions", "com.reto.utils"},
         snippets = SnippetType.CAMELCASE,
         plugin = "pretty"
