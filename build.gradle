@@ -1,0 +1,58 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.80")
+    }
+}
+
+group 'com.screenplay'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    serenityCoreVersion = "2.0.80"
+    serenityCucumberVersion = "1.9.51"
+}
+
+dependencies {
+    testCompile("net.serenity-bdd:serenity-core:${serenityCoreVersion}")
+    testCompile("net.serenity-bdd:serenity-junit:${serenityCoreVersion}")
+    testCompile("junit:junit:4.12")
+    testCompile("org.assertj:assertj-core:3.8.0")
+    testCompile("org.slf4j:slf4j-simple:1.7.7")
+
+    compile "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+    compile "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
+    compile "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
+    compile "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
+    compile "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
